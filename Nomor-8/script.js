@@ -38,6 +38,13 @@ const dataPenjualanNovel = [
 
 ]
 
+const rupiah = (number)=>{
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    }).format(number);
+  }
+
 const getInfoPenjualan = (dataPenjualan) => {
     let totalKeuntungan = 0, totalModal = 0, Keuntungan = 0, persentaseKeuntungan = 0, terbanyak = 0;
     let namaTerbanyak, penulisTerlaris;
@@ -55,8 +62,8 @@ const getInfoPenjualan = (dataPenjualan) => {
     persentaseKeuntungan = totalKeuntungan/totalModal * 100
 
     return {
-          totalKeuntungan : totalKeuntungan,
-          totalModal : totalModal,
+          totalKeuntungan : rupiah(totalKeuntungan),
+          totalModal : rupiah(totalModal),
           persentaseKeuntungan : persentaseKeuntungan.toFixed(1) + " %",
           produkBukuTerlaris : namaTerbanyak,
           penulisTerlaris : penulisTerlaris
