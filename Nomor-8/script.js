@@ -86,9 +86,6 @@ const getInfoPenjualan = (dataPenjualan) => {
           persentaseKeuntungan : persentaseKeuntungan.toFixed(1) + " %",
           produkBukuTerlaris : namaTerbanyak,
           penulisTerlaris : penulisTerlaris,
-          terbanyak : terbanyak,
-          terbanyak2 : terbanyak2,
-          tmp : tmp
     }
     
 }
