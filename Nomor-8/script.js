@@ -46,18 +46,37 @@ const rupiah = (number)=>{
   }
 
 const getInfoPenjualan = (dataPenjualan) => {
-    let totalKeuntungan = 0, totalModal = 0, Keuntungan = 0, persentaseKeuntungan = 0, terbanyak = 0;
-    let namaTerbanyak, penulisTerlaris;
+    let totalKeuntungan = 0, totalModal = 0, Keuntungan = 0, persentaseKeuntungan = 0, terbanyak = 0, terbanyak2 = 0;
+    let namaTerbanyak
+    let penulisTerlaris, penulisTerlarisKembar
+    let tmp = 0
     for ( let i = 0; i < dataPenjualanNovel.length; i++){
-        totalModal += dataPenjualanNovel[i].hargaBeli * (dataPenjualanNovel[i].totalTerjual + dataPenjualanNovel[i].sisaStok)
-        Keuntungan += dataPenjualanNovel[i].hargaJual * dataPenjualanNovel[i].totalTerjual
-        if(terbanyak < dataPenjualanNovel[i].totalTerjual){
-            terbanyak = dataPenjualanNovel[i].totalTerjual
-            namaTerbanyak = dataPenjualanNovel[i].namaProduk
-            penulisTerlaris = dataPenjualanNovel[i].penulis
-        }
-
+            totalModal += dataPenjualanNovel[i].hargaBeli * (dataPenjualanNovel[i].totalTerjual + dataPenjualanNovel[i].sisaStok)
+            Keuntungan += dataPenjualanNovel[i].hargaJual * dataPenjualanNovel[i].totalTerjual
+            if(terbanyak < dataPenjualanNovel[i].totalTerjual){
+                terbanyak = dataPenjualanNovel[i].totalTerjual
+                namaTerbanyak = dataPenjualanNovel[i].namaProduk
+                penulisTerlaris = dataPenjualanNovel[i].penulis
+            }
     }
+    for ( let i = 0; i < dataPenjualanNovel.length; i++){
+        for( let j = i+1; j < dataPenjualanNovel.length; j++){
+            if (dataPenjualanNovel[i].penulis === dataPenjualanNovel[j].penulis){
+                terbanyak2 = dataPenjualanNovel[i].totalTerjual + dataPenjualanNovel[j].totalTerjual
+                if (terbanyak2 > terbanyak){
+                    terbanyak = terbanyak2
+                    penulisTerlarisKembar = dataPenjualanNovel[i].penulis
+                    penulisTerlaris = penulisTerlarisKembar
+                }else if ( terbanyak2 < terbanyak ){
+                    penulisTerlaris
+                }
+            }
+        }
+    }
+        
+   
+    
+
     totalKeuntungan = Keuntungan - totalModal
     persentaseKeuntungan = totalKeuntungan/totalModal * 100
 
@@ -66,7 +85,10 @@ const getInfoPenjualan = (dataPenjualan) => {
           totalModal : rupiah(totalModal),
           persentaseKeuntungan : persentaseKeuntungan.toFixed(1) + " %",
           produkBukuTerlaris : namaTerbanyak,
-          penulisTerlaris : penulisTerlaris
+          penulisTerlaris : penulisTerlaris,
+          terbanyak : terbanyak,
+          terbanyak2 : terbanyak2,
+          tmp : tmp
     }
     
 }
